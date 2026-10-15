@@ -16,6 +16,9 @@ pub use backend::CertificateTransparencyBackend;
 pub use censys::{Censys, CensysFree};
 pub use crtsh::{CrtSh, discover_from_json};
 
+/// Desktop Chrome user agent sent with every backend HTTP request.
+pub(crate) const USER_AGENT: &str = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36";
+
 /// A unique certificate identity. Wildcard identities remain separate from hosts.
 #[derive(Debug, Serialize)]
 pub struct DiscoveredDomain {

@@ -86,7 +86,7 @@ pub fn discover_from_json(domain: &str, json: &[u8]) -> Result<Vec<DiscoveredDom
 fn discover_at(endpoint: &str, domain: &str, timeout: Duration) -> Result<Vec<DiscoveredDomain>> {
     let domain = parse_domain(domain).map_err(anyhow::Error::msg)?;
     let client = Client::builder()
-        .user_agent(concat!("certwalk/", env!("CARGO_PKG_VERSION")))
+        .user_agent(crate::USER_AGENT)
         .connect_timeout(Duration::from_secs(10).min(timeout))
         .timeout(timeout)
         .build()

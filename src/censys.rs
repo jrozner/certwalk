@@ -264,7 +264,7 @@ impl CensysFree {
 
     fn client(&self, timeout: Duration) -> Result<Client> {
         Client::builder()
-            .user_agent(concat!("certwalk/", env!("CARGO_PKG_VERSION")))
+            .user_agent(crate::USER_AGENT)
             .default_headers(self.headers.clone())
             .connect_timeout(Duration::from_secs(10).min(timeout))
             .timeout(timeout)
@@ -818,6 +818,12 @@ mod tests {
                     .headers
                     .to_lowercase()
                     .contains("accept: application/json")
+            );
+            assert!(
+                request
+                    .headers
+                    .to_lowercase()
+                    .contains(&format!("user-agent: {}", crate::USER_AGENT.to_lowercase()))
             );
             assert!(request.body.is_empty());
         }
